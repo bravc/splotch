@@ -1,7 +1,7 @@
 <script>
 	import { link, push } from 'svelte-spa-router';
 	import active from 'svelte-spa-router/active';
-	import { user } from '../store';
+	import { user } from '../stores/user';
 	let query_string = new URLSearchParams({
 		client_id: 'd71d26149e4c4ba4b118868ad225bfa2',
 		response_type: 'code',

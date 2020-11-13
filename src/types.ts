@@ -1,9 +1,7 @@
 export type User = {
-	access_token?: string;
 	username: string;
 	id: number;
 	email: string;
-	spotify_token?: string;
 };
 
 export type ResponseUser = {

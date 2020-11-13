@@ -1,5 +1,5 @@
 <script>
-	import { user } from '../store';
+	import { user } from '../stores/user';
 </script>
 
 <div class="tile is-parent is-primary is-2">

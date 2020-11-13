@@ -1,11 +1,9 @@
 <script lang="ts">
-	import { device_id, player, waitForSpot } from '../stores/player';
+	import { device_id, player, waitForSpot, seeking, playing } from '../stores/player';
 	import { track_position, track } from '../stores/current_track';
 	import { onMount } from 'svelte';
 
-	let playing = false;
-	let seeking = false;
-	$: playerIcon = `<i class="${playing ? 'fas fa-pause' : 'fas fa-play'}" />`;
+	$: playerIcon = `<i class="${$playing ? 'fas fa-pause' : 'fas fa-play'}" />`;
 
 	const toPrettyTimestamp = (duration) => {
 		if (duration) {
@@ -16,7 +14,7 @@
 	};
 
 	const interval = setInterval(() => {
-		if (playing && !seeking) {
+		if ($playing && !$seeking) {
 			console.log(($track_position / 60000).toString().slice(2, 4));
 			$track_position += 10;
 		}
@@ -25,24 +23,11 @@
 	onMount(async () => {
 		const { Player } = await waitForSpot();
 		player.setPlayer(Player);
-		$player.addListener('player_state_changed', ({ position, paused, duration, track_window: { current_track } }) => {
-			if ($track && $track.name != current_track.name) {
-				$track_position = 0;
-			}
-			track.set(current_track);
-
-			playing = !paused;
-		});
-
-		$player.addListener('ready', (ready) => {
-			device_id.set(ready.device_id);
-			console.log('Ready with Device ID', device_id);
-		});
 	});
 </script>
 
 <!-- svelte-ignore a11y-missing-attribute -->
-<div class="tile is-parent is-6">
+<div class="tile is-parent is-7">
 	<article class="tile box is-child notification is-primary">
 		<p class="title">What are you listening to?</p>
 		<article class="level">
@@ -68,7 +53,7 @@
 							<input
 								class="slider media-content is-fullwidth is-circle"
 								on:mousedown={() => {
-									seeking = true;
+									$seeking = true;
 								}}
 								on:mouseup={() => {
 									console.log(`Position is: ${$track_position}`);
@@ -76,7 +61,7 @@
 									$player.seek($track_position).then(() => {
 										console.log('Changed position!');
 									});
-									seeking = false;
+									$seeking = false;
 								}}
 								type="range"
 								min="0"
@@ -91,7 +76,7 @@
 										class="fas fa-backward" /></span></a>
 							<a
 								on:click={() => $player.togglePlay().then(() => {
-										playing = !playing;
+										$playing = !$playing;
 										console.log('Toggled playback!');
 									})}
 								class="level-item"><span class="icon is-small">{@html playerIcon}</span></a>

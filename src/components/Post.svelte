@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { apiRequest, HttpVerb } from '../api/utils';
-	import { user } from '../store';
+	import { spotify_token } from '../stores/user';
 	import { device_id } from '../stores/player';
 
 	import type { Track } from '../types';
@@ -10,7 +10,7 @@
 		let res = await apiRequest(
 			`https://api.spotify.com/v1/me/player/play?device_id=${$device_id}`,
 			HttpVerb.PUT,
-			$user.spotify_token,
+			$spotify_token,
 			{
 				uris: [currentSong.uri],
 			}

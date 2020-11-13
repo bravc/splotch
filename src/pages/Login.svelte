@@ -6,7 +6,7 @@
 	let loading = false;
 
 	import { push } from 'svelte-spa-router';
-	import { user } from '../store';
+	import { user, access_token } from '../stores/user';
 	import { responseToUser } from '../types';
 	import type { ResponseUser, User } from '../types';
 	import { apiRequest, HttpVerb } from '../api/utils';
@@ -26,6 +26,8 @@
 
 			loading = false;
 			user.login(responseToUser(_user));
+			access_token.setAuth(_user.access_token);
+
 			push('/');
 		} else {
 			loading = true;
@@ -35,7 +37,9 @@
 			});
 
 			loading = false;
+			console.log(_user);
 			user.login(responseToUser(_user));
+			access_token.setAuth(_user.access_token);
 			push('/');
 		}
 	};

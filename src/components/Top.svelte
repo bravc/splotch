@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Post from './Post.svelte';
-	import { user } from '../store';
+	import { access_token } from '../stores/user';
 	import { onMount } from 'svelte';
 
 	import type { Track, RecentTrack } from '../types';
@@ -18,7 +18,7 @@
 		let res = await fetch(`http://localhost:8080/api/top?time_range=${time_range}`, {
 			method: 'GET',
 			mode: 'cors',
-			headers: new Headers({ 'Content-Type': 'application/json', Authorization: `Bearer ${$user.access_token}` }),
+			headers: new Headers({ 'Content-Type': 'application/json', Authorization: `Bearer ${$access_token}` }),
 		});
 		console.log(res);
 		let json = await res.json();
