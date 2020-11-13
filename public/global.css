@@ -1,0 +1,37 @@
+/* html,
+body {
+	margin: 0;
+	height: 100%;
+	overflow: hidden;
+} */
+
+/* body::-webkit-scrollbar {
+	width: 0.7em;
+	background: white;
+}
+body::-webkit-scrollbar-thumb {
+	background: #c0392b;
+	height: 30px;
+} */
+
+.g::-webkit-scrollbar-track-piece {
+	display: none;
+}
+
+.g::-webkit-scrollbar {
+	width: 10px;
+}
+
+.g::-webkit-scrollbar-track {
+	border: solid 5px transparent;
+}
+
+.g::-webkit-scrollbar-track {
+	background: transparent;
+}
+.g::-webkit-scrollbar-thumb {
+    border: solid 3px transparent;
+	background-clip: content-box;
+	background-color: turquoise;
+	border-radius: 20px;
+}
