@@ -47,45 +47,53 @@
 	};
 </script>
 
-<div class="notification">
-	<div class="field">
-		<label for="" class="label">Username</label>
-		<div class="control has-icons-left has-icons-right">
-			<input class="input" type="text" placeholder="Username" bind:value={username} />
-			<span class="icon is-small is-left"> <i class="fas fa-user" /> </span>
-			<!-- <span class="icon is-small is-right"> <i class="fas fa-check" /> </span> -->
-		</div>
-		<!-- <p class="help is-success">This username is available</p> -->
-	</div>
-	<div class="field">
-		<label for="" class="label">Password</label>
-		<div class="control has-icons-left has-icons-right">
-			<input class="input" type="password" placeholder="Password" bind:value={password} />
-			<span class="icon is-small is-left"> <i class="fas fa-user" /> </span>
-			<!-- <span class="icon is-small is-right"> <i class="fas fa-check" /> </span> -->
-		</div>
-		<!-- <p class="help is-success">This username is available</p> -->
-	</div>
+<style>
+	/* .notification {
+		max-width: 60vh;
+	} */
+</style>
 
-	{#if register}
+<div class="columns">
+	<div class="notification column is-half is-offset-one-quarter">
 		<div class="field">
-			<label for="" class="label">Email</label>
+			<label for="" class="label">Username</label>
 			<div class="control has-icons-left has-icons-right">
-				<input class="input" type="email" placeholder="Email" bind:value={email} />
-				<span class="icon is-small is-left"> <i class="fas fa-envelope" /> </span>
-				<!-- <span class="icon is-small is-right"> <i class="fas fa-exclamation-triangle" /> </span> -->
+				<input class="input" type="text" placeholder="Username" bind:value={username} />
+				<span class="icon is-small is-left"> <i class="fas fa-user" /> </span>
+				<!-- <span class="icon is-small is-right"> <i class="fas fa-check" /> </span> -->
 			</div>
-			<!-- <p class="help is-danger">This email is invalid</p> -->
+			<!-- <p class="help is-success">This username is available</p> -->
 		</div>
-	{/if}
-	<br />
-	{#if loading}<progress class="progress is-small is-primary" max="100">15%</progress>{/if}
-	<div class="field is-grouped">
-		<div class="control"><button on:click={formSubmit} class="button is-link">Submit</button></div>
-		<div class="control">
-			<button
-				on:click={() => (register = !register)}
-				class="button is-link is-warning">{register ? 'Sign In' : 'Register'}</button>
+		<div class="field">
+			<label for="" class="label">Password</label>
+			<div class="control has-icons-left has-icons-right">
+				<input class="input" type="password" placeholder="Password" bind:value={password} />
+				<span class="icon is-small is-left"> <i class="fas fa-user" /> </span>
+				<!-- <span class="icon is-small is-right"> <i class="fas fa-check" /> </span> -->
+			</div>
+			<!-- <p class="help is-success">This username is available</p> -->
+		</div>
+
+		{#if register}
+			<div class="field">
+				<label for="" class="label">Email</label>
+				<div class="control has-icons-left has-icons-right">
+					<input class="input" type="email" placeholder="Email" bind:value={email} />
+					<span class="icon is-small is-left"> <i class="fas fa-envelope" /> </span>
+					<!-- <span class="icon is-small is-right"> <i class="fas fa-exclamation-triangle" /> </span> -->
+				</div>
+				<!-- <p class="help is-danger">This email is invalid</p> -->
+			</div>
+		{/if}
+		<br />
+		{#if loading}<progress class="progress is-small is-primary" max="100">15%</progress>{/if}
+		<div class="field is-grouped">
+			<div class="control"><button on:click={formSubmit} class="button is-link">Submit</button></div>
+			<div class="control">
+				<button
+					on:click={() => (register = !register)}
+					class="button is-link is-warning">{register ? 'Sign In' : 'Register'}</button>
+			</div>
 		</div>
 	</div>
 </div>

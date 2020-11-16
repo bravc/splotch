@@ -1,21 +1,13 @@
 <script lang="ts">
 	import Router from 'svelte-spa-router';
 	import Navbar from './components/Navbar.svelte';
-	import Home from './pages/Home.svelte';
-	import About from './pages/About.svelte';
-	import Login from './pages/Login.svelte';
 
 	const routes = {
-		'/about': About,
-		'/login': Login,
-
-		'/': Home,
+		'/*': Navbar,
 	};
 </script>
 
-
 <section class="hero is-success is-fullheight">
-	<Navbar />
 	<Router {routes} />
 	<footer class="hero-foot">
 		<div class="content has-text-centered">

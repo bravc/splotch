@@ -4,7 +4,7 @@
   "scripts": {
     "build": "node-sass src/style.scss > public/base.css && rollup -c",
     "dev": "rollup -c -w",
-    "start": "sirv public",
+    "start": "sirv public --single",
     "validate": "svelte-check"
   },
   "devDependencies": {
