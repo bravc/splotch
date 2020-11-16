@@ -4,6 +4,7 @@
 	import Top from '../components/Top.svelte';
 	import UserTile from '../components/UserTile.svelte';
 	import Following from '../components/Following.svelte';
+import TrackList from '../components/TrackList.svelte';
 </script>
 
 
@@ -16,7 +17,8 @@
 			<Following />
 		</div>
 		<div class="tile is-ancestor">
-			<Recent />
+			<!-- <Recent /> -->
+			<!-- <TrackList /> -->
 			<Top />
 		</div>
 	</div>

@@ -1,6 +1,10 @@
 /node_modules/
 /public/build/
 
+/public/base.css
 .DS_Store
+.env
 .sass-cache/
 .vscode/
+# Local Netlify folder
+.netlify

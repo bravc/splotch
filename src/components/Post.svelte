@@ -20,19 +20,32 @@
 </script>
 
 <div class="tile pb-4 is-child">
-	<article class="is-primary notification is-clickable box">
+	<article on:click={playSong} class="is-primary notification is-clickable box">
 		<article class="media">
 			<figure class="media-left">
-				<p class="image is-64x64">
-					<a href={`https://open.spotify.com/track/${currentSong.id}`}><img
-							src={currentSong.album.images[0].url}
-							alt="" /></a>
-				</p>
+				<p class="image is-64x64"><img src={currentSong.album.images[0].url} alt="" /></p>
 			</figure>
-			<div on:click={playSong} class="media-content">
+			<div class="media-content">
 				<div class="content">
 					<p class="title is-4"><strong>{currentSong.name}</strong></p>
 					<p class="subtitle">{currentSong.artists[0].name}</p>
+				</div>
+			</div>
+			<div class="media-right">
+				<div class="content">
+					<div class="dropdown">
+						<div class="dropdown-trigger">
+							<button class="button is-outline is-transparent" aria-haspopup="true" aria-controls="dropdown-menu">
+								<!-- <span>Dropdown button</span> -->
+								<span class="icon is-small"> <i class="fas fa-ellipsis-h" aria-hidden="true" /> </span>
+							</button>
+						</div>
+						<div class="dropdown-menu" id="dropdown-menu" role="menu">
+							<div class="dropdown-content">
+								<a href="#" class="dropdown-item"> Dropdown item </a>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</article>

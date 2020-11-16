@@ -1,4 +1,4 @@
-import { user } from '../store';
+import { user } from '../stores/user';
 
 export enum HttpVerb {
 	GET = 'GET',
@@ -9,7 +9,7 @@ export enum HttpVerb {
 export let apiRequest = async <T>(
 	url: string,
 	method: HttpVerb,
-	auth?: object,
+	auth?: string,
 	body?: object,
 	returnJson?: boolean
 ): Promise<T> => {

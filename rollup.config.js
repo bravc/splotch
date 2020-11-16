@@ -6,8 +6,11 @@ import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
 import sveltePreprocess from 'svelte-preprocess';
 import css from 'rollup-plugin-css-only';
+import { config } from 'dotenv';
+import replace from '@rollup/plugin-replace';
 
 const production = !process.env.ROLLUP_WATCH;
+config();
 
 function serve() {
 	let server;
@@ -50,6 +53,16 @@ export default {
 			preprocess: sveltePreprocess(),
 		}),
 		css({ output: 'public/build/base.css' }),
+		replace({
+			// stringify the object
+			__myapp: JSON.stringify({
+				env: {
+					isProd: production,
+					API_URL: process.env.API_URL,
+					clieCLIENT_IDnt_id: process.env.CLIENT_ID,
+				},
+			}),
+		}),
 
 		// If you have external dependencies installed from
 		// npm, you'll most likely need these plugins. In

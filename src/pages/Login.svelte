@@ -1,25 +1,27 @@
 <script lang="ts">
-	let username = '';
-	let email = '';
-	let password = '';
-	let register = false;
-	let loading = false;
-
 	import { push } from 'svelte-spa-router';
 	import { user, access_token } from '../stores/user';
 	import { responseToUser } from '../types';
 	import type { ResponseUser, User } from '../types';
 	import { apiRequest, HttpVerb } from '../api/utils';
+
+	let username = '';
+	let email = '';
+	let password = '';
+	let register = false;
+	let loading = false;
+	const apiUrl = __myapp.env.API_URL;
+
 	export let formSubmit = async () => {
 		if (register) {
 			loading = true;
-			await apiRequest('http://localhost:8080/auth/register', HttpVerb.POST, false, {
+			await apiRequest(`${apiUrl}/auth/register`, HttpVerb.POST, false, {
 				username: username,
 				email: email,
 				password: password,
 			});
 
-			let _user: ResponseUser = await apiRequest('http://localhost:8080/auth/token', HttpVerb.POST, false, {
+			let _user: ResponseUser = await apiRequest(`${apiUrl}/auth/token`, HttpVerb.POST, false, {
 				username: username,
 				password: password,
 			});
@@ -31,7 +33,7 @@
 			push('/');
 		} else {
 			loading = true;
-			let _user: ResponseUser = await apiRequest('http://localhost:8080/auth/token', HttpVerb.POST, false, {
+			let _user: ResponseUser = await apiRequest(`${apiUrl}/auth/token`, HttpVerb.POST, false, {
 				username: username,
 				password: password,
 			});

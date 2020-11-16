@@ -1,8 +1,21 @@
 @charset "utf-8";
 
+$charcoal: #264653ff;
+$persian-green: #2a9d8fff;
+$orange-yellow-crayola: #e9c46aff;
+$sandy-brown: #f4a261ff;
+$burnt-sienna: #e76f51ff;
+$paradise-pink: #ef476fff;
+$caribbean-green: #06d6a0ff;
+$blue-ncs: #118ab2ff;
+$midnight-green-eagle-green: #073b4cff;
+
+
 // Set your brand colors
-$primary: #20c6b6;
-$success: #3adfcf;
+$primary: $persian-green;
+$success: $charcoal;
+$warning: $orange-yellow-crayola;
+$info: $blue-ncs;
 $scrollbar-color: black;
 
 @import '../node_modules/bulma/bulma.sass';

@@ -72,7 +72,7 @@
 							</div>
 						</div>
 						<div class="level">
-							<a on:click={() => console.log('df')} class="level-item"><span class="icon is-small"><i
+							<a on:click={() => $player.previousTrack()} class="level-item"><span class="icon is-small"><i
 										class="fas fa-backward" /></span></a>
 							<a
 								on:click={() => $player.togglePlay().then(() => {
@@ -80,7 +80,7 @@
 										console.log('Toggled playback!');
 									})}
 								class="level-item"><span class="icon is-small">{@html playerIcon}</span></a>
-							<a on:click={() => console.log('df')} class="level-item"><span class="icon is-small"><i
+							<a on:click={() => $player.nextTrack()} class="level-item"><span class="icon is-small"><i
 										class="fas fa-forward" /></span></a>
 						</div>
 					</div>

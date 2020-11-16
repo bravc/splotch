@@ -24,7 +24,6 @@ export type Track = {
 	album: Album;
 	artists: Artist[];
 	duration_ms: number;
-	position: number;
 	uri: string;
 	popularity: number;
 };

@@ -2,9 +2,10 @@
 	import Post from './Post.svelte';
 	import { access_token } from '../stores/user';
 	import type { Track, RecentTrack } from '../types';
+	const apiUrl = __myapp.env.API_URL;
 
 	let recentTracks = async (): Promise<RecentTrack[]> => {
-		let res = await fetch('http://localhost:8080/api/recent', {
+		let res = await fetch(`${apiUrl}/api/recent`, {
 			method: 'GET',
 			mode: 'cors',
 			headers: new Headers({ 'Content-Type': 'application/json', Authorization: `Bearer ${$access_token}` }),
