@@ -11,6 +11,16 @@
 	let register = false;
 	let loading = false;
 	const apiUrl = __myapp.env.API_URL;
+	const client_id = __myapp.env.CLIENT_ID;
+	const query_string = (user_id: number) =>
+		new URLSearchParams({
+			client_id: client_id,
+			response_type: 'code',
+			state: user_id.toString(),
+			redirect_uri: `${apiUrl}/auth/spotify/callback`,
+			scope:
+				'user-read-recently-played user-top-read user-read-recently-played user-read-private streaming user-read-email',
+		}).toString();
 
 	export let formSubmit = async () => {
 		if (register) {
@@ -29,8 +39,7 @@
 			loading = false;
 			user.login(responseToUser(_user));
 			access_token.setAuth(_user.access_token);
-
-			push('/');
+			window.location.href = `https://accounts.spotify.com/authorize?${query_string(_user.user.id)}`;
 		} else {
 			loading = true;
 			let _user: ResponseUser = await apiRequest(`${apiUrl}/auth/token`, HttpVerb.POST, false, {
@@ -42,7 +51,12 @@
 			console.log(_user);
 			user.login(responseToUser(_user));
 			access_token.setAuth(_user.access_token);
-			push('/');
+
+			if (!_user.user.spotify_refresh) {
+				window.location.href = `https://accounts.spotify.com/authorize?${query_string(_user.user.id)}`;
+			} else {
+				push('/');
+			}
 		}
 	};
 </script>

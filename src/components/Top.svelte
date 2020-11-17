@@ -58,7 +58,7 @@
 		<h1 class="level-left is-size-3">What are your top songs?</h1>
 
 		<div class="level-right">
-			<button on:click={playSongs} class="button level-item is-rounded is-outlined"><i class="fas fa-save" /></button>
+			<button on:click={playSongs} class="button level-item is-dark is-rounded"><i class="fas fa-save" /></button>
 			<div class="level-item control has-icons-left">
 				<div class="select level-item select is-rounded">
 					<select on:blur={() => topTracks()} bind:value={time_range}>

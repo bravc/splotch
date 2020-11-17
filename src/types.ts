@@ -2,6 +2,7 @@ export type User = {
 	username: string;
 	id: number;
 	email: string;
+	spotify_refresh: string;
 };
 
 export type ResponseUser = {
