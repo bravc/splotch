@@ -1,4 +1,4 @@
-import { user } from '../stores/user';
+import { error, errorMessage } from '../stores/errors';
 
 export enum HttpVerb {
 	GET = 'GET',
@@ -11,7 +11,7 @@ export let apiRequest = async <T>(
 	method: HttpVerb,
 	auth?: string,
 	body?: object,
-	returnJson?: boolean
+	returnJson: boolean = true
 ): Promise<T> => {
 	let headers = { 'Content-Type': 'application/json' };
 	headers = auth
@@ -22,17 +22,23 @@ export let apiRequest = async <T>(
 				},
 		  }
 		: headers;
-
-	let res = await fetch(url, {
-		method: method,
-		mode: 'cors',
-		headers: new Headers(headers),
-		body: body ? JSON.stringify(body) : null,
-	});
-	if (res.ok) {
-		let json: T = await res.json();
-		return json;
-	} else {
-		return null;
+	try {
+		let res = await fetch(url, {
+			method: method,
+			mode: 'cors',
+			headers: new Headers(headers),
+			body: body ? JSON.stringify(body) : null,
+		});
+		console.log(`Response from ${url}`);
+		console.log(res);
+		if (res.ok && returnJson) {
+			let json: T = await res.json();
+			return json;
+		} else if (!res.ok) {
+			error.set(true);
+		}
+	} catch (e) {
+		error.set(true);
+		errorMessage.set(e.message)
 	}
 };

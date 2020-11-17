@@ -1,9 +1,10 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
+
 	import Post from './Post.svelte';
 	import { access_token, spotify_token } from '../stores/user';
 	import { device_id } from '../stores/player';
-	import { onMount } from 'svelte';
-	import type { Track, RecentTrack } from '../types';
+	import type { Track } from '../types';
 	import { apiRequest, HttpVerb } from '../api/utils';
 
 	const apiUrl = __myapp.env.API_URL;
@@ -28,23 +29,19 @@
 	};
 
 	let topTracks = async (): Promise<Track[]> => {
-		console.log(time_range);
 		loading = true;
-		let res = await fetch(`${apiUrl}/api/top?time_range=${time_range}`, {
-			method: 'GET',
-			mode: 'cors',
-			headers: new Headers({ 'Content-Type': 'application/json', Authorization: `Bearer ${$access_token}` }),
-		});
-		let json = await res.json();
-		console.log(json);
+		let json: { items: Track[] } = await apiRequest(
+			`${apiUrl}/api/top?time_range=${time_range}`,
+			HttpVerb.GET,
+			$access_token
+		);
+		loading = false;
 
 		tracks = json.items;
-		loading = false;
 		return json.items;
 	};
 </script>
 
-<!-- svelte-ignore a11y-no-onchange -->
 <style>
 	.g {
 		overflow-y: auto !important;

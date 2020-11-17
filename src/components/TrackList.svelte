@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Post from './Post.svelte';
-	import { fade } from 'svelte/transition';
+	import { slide } from 'svelte/transition';
 	import { test_tracks } from '../stores/player';
 
 	import type { Track } from '../types';
@@ -23,7 +23,7 @@
 	{#if loading}
 		<progress class="progress is-small is-primary" max="100">15%</progress>
 	{:else}
-		<div transition:fade class="g">
+		<div transition:slide|local class="g">
 			{#each tracks as track, i}
 				<Post currentSong={track} />
 			{/each}

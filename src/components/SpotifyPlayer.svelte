@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { device_id, player, waitForSpot, seeking, playing } from '../stores/player';
+	import { player, waitForSpot, seeking, playing } from '../stores/player';
 	import { track_position, track } from '../stores/current_track';
 	import { onMount } from 'svelte';
 
@@ -13,7 +13,7 @@
 		return '-:--';
 	};
 
-	const interval = setInterval(() => {
+	setInterval(() => {
 		if ($playing && !$seeking) {
 			console.log(($track_position / 60000).toString().slice(2, 4));
 			$track_position += 10;

@@ -14,8 +14,6 @@ function createPlayer() {
 				name: 'Splotch Toolbox',
 				getOAuthToken: async (cb) => {
 					console.log('Trying to get fresh token');
-					
-
 					let res: { access_token: string } = await apiRequest(
 						`${apiUrl}/api/fresh`,
 						HttpVerb.GET,

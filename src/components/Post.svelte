@@ -4,6 +4,8 @@
 	import { device_id } from '../stores/player';
 
 	import type { Track } from '../types';
+	import Login from '../pages/Login.svelte';
+	let dropdownActive = false;
 	export let currentSong: Track;
 
 	let playSong = async (e) => {
@@ -13,19 +15,22 @@
 			$spotify_token,
 			{
 				uris: [currentSong.uri],
-			}
+			},
+			false
 		);
 		console.log(res);
 	};
+	$: console.log(dropdownActive);
 </script>
 
+
 <div class="tile pb-4 is-child">
-	<article on:click={playSong} class="is-primary notification is-clickable box">
+	<article class="is-primary notification is-clickable box">
 		<article class="media">
 			<figure class="media-left">
 				<p class="image is-64x64"><img src={currentSong.album.images[0].url} alt="" /></p>
 			</figure>
-			<div class="media-content">
+			<div on:click={playSong} class="media-content">
 				<div class="content">
 					<p class="title is-4"><strong>{currentSong.name}</strong></p>
 					<p class="subtitle">{currentSong.artists[0].name}</p>
@@ -33,16 +38,22 @@
 			</div>
 			<div class="media-right">
 				<div class="content">
-					<div class="dropdown">
-						<div class="dropdown-trigger">
-							<button class="button is-outline is-transparent" aria-haspopup="true" aria-controls="dropdown-menu">
-								<!-- <span>Dropdown button</span> -->
-								<span class="icon is-small"> <i class="fas fa-ellipsis-h" aria-hidden="true" /> </span>
-							</button>
+					<div on:blur={() => (dropdownActive = false)} class="dropdown is-right {dropdownActive ? 'is-active' : ''}">
+						<div on:blur={() => (dropdownActive = false)} class="dropdown-trigger">
+							<div class="">
+								<span
+									on:click={() => (dropdownActive = !dropdownActive)}
+									
+									class="icon is-large"
+									aria-haspopup="true"
+									aria-controls="dropdown-menu6">
+									<i class="fas fa-ellipsis-h" aria-hidden="true" />
+								</span>
+							</div>
 						</div>
-						<div class="dropdown-menu" id="dropdown-menu" role="menu">
-							<div class="dropdown-content">
-								<a href="#" class="dropdown-item"> Dropdown item </a>
+						<div class="dropdown-menu is-dark" id="dropdown-menu" role="menu">
+							<div class="is-dark dropdown-content">
+								<div on:blur={() => (dropdownActive = false)} on:click={() => (dropdownActive = false)} class="is-dark dropdown-item">Add to queue</div>
 							</div>
 						</div>
 					</div>

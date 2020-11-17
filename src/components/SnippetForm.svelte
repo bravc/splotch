@@ -1,9 +1,11 @@
 <script lang="ts">
 	import { track_position, track } from '../stores/current_track';
 	import { player } from '../stores/player';
+	import SnippetModal from './SnippetModal.svelte';
 
 	let start_time = 0;
 	let end_time = 0;
+	let showing = false;
 	$: pretty_start = toPrettyTimestamp(start_time);
 	$: pretty_end = toPrettyTimestamp(end_time);
 
@@ -19,15 +21,6 @@
 			return `${Math.trunc(duration / 60000)}:${(seconds < 10 ? '0' : '') + seconds}`;
 		}
 		return '-:--';
-	};
-
-	const convertToTimestamp = (timestamp: string) => {
-		let minutes = parseInt(timestamp.slice(0, 1));
-		let seconds = parseInt(timestamp.slice(1));
-
-		let total = minutes + seconds * 60;
-		console.log(total);
-		console.log(total * 60000);
 	};
 </script>
 
@@ -55,6 +48,10 @@
 			</div>
 		</div>
 
-		<button on:click={start_part} class="button is-rounded is-small">Create Snippet</button>
+		<button on:click={() => (showing = true)} class="button is-rounded is-small">Create Snippet</button>
+		<div class="modal {showing ? 'is-active' : ''}">
+			<div on:click={() => (showing = false)} class="modal-background" />
+			<SnippetModal {showing} />
+		</div>
 	</div>
 </div>

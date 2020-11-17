@@ -1,30 +1,36 @@
 <script lang="ts">
 	import { link } from 'svelte-spa-router';
 
-	import Recent from '../components/Recent.svelte';
 	import SpotifyPlayer from '../components/SpotifyPlayer.svelte';
 	import Top from '../components/Top.svelte';
 	import UserTile from '../components/UserTile.svelte';
-	import Following from '../components/Following.svelte';
 	import TrackList from '../components/TrackList.svelte';
 	import { access_token, spotify_token } from '../stores/user';
+	import SnippetForm from '../components/SnippetForm.svelte';
 </script>
 
-<div class="hero-body">
-	<div class="container-fluid is-primary">
-		{#if $access_token !== null}
+<style>
+</style>
+
+{#if $access_token !== null}
+	<div class="hero-body">
+		<div class="container is-fluid is-primary">
 			<div class="tile is-ancestor">
 				<UserTile />
 				<SpotifyPlayer />
-				<Following />
+				<SnippetForm />
 			</div>
 			<div class="tile is-ancestor">
-				<!-- <Recent /> -->
-				<!-- <TrackList /> -->
-				<Top />
+				<TrackList />
+				<!-- <Top /> -->
 			</div>
-		{:else}
-			<a href="/login" use:link>Login</a>
-		{/if}
+		</div>
 	</div>
-</div>
+{:else}
+	<div class="container is-fluid has-text-centered">
+		<div class="notification is-danger">
+			<h1 class="title">You're not logged in!</h1>
+			<a class="button is-link" href="/login" use:link>Login</a>
+		</div>
+	</div>
+{/if}

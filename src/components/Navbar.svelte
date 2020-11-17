@@ -1,19 +1,7 @@
 <script>
-	import { link, push } from 'svelte-spa-router';
+	import { link } from 'svelte-spa-router';
 	import active from 'svelte-spa-router/active';
 	import { user } from '../stores/user';
-
-	const client_id = __myapp.env.CLIENT_ID;
-	const apiUrl = __myapp.env.API_URL;
-
-	let query_string = new URLSearchParams({
-		client_id: client_id,
-		response_type: 'code',
-		state: $user ? $user.id : '',
-		redirect_uri: `${apiUrl}/auth/spotify/callback`,
-		scope:
-			'user-read-recently-played user-top-read user-read-recently-played user-read-private streaming user-read-email',
-	}).toString();
 </script>
 
 <style>
@@ -46,11 +34,6 @@
 								class="button is-warning is-light">
 								Logout
 							</button>
-							{#if !$user.spotify_refresh}
-								<a href="https://accounts.spotify.com/authorize?{query_string}" class="button is-light">
-									Connect Spotify
-								</a>
-							{/if}
 						{/if}
 					</div>
 				</div>
