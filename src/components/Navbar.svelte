@@ -1,20 +1,9 @@
 <script>
 	import { link, push } from 'svelte-spa-router';
-	import Router from 'svelte-spa-router';
 	import active from 'svelte-spa-router/active';
 	import { user } from '../stores/user';
-	import Home from '../pages/Home.svelte';
-	import About from '../pages/About.svelte';
-	import Login from '../pages/Login.svelte';
 
-	const routes = {
-		'/': Home,
-		'/about': About,
-		'/login': Login,
-	};
-	const prefix = '';
-
-	const client_id = __myapp.env.SPOT_CLIENT_ID;
+	const client_id = __myapp.env.CLIENT_ID;
 	const apiUrl = __myapp.env.API_URL;
 
 	let query_string = new URLSearchParams({
@@ -50,15 +39,13 @@
 								<bold class="pl-1">{$user.username}</bold>
 							</p>
 
-							<a
+							<button
 								on:click={() => {
 									user.logout();
 								}}
-								use:link
-								href="/login"
 								class="button is-warning is-light">
 								Logout
-							</a>
+							</button>
 							{#if !$user.spotify_refresh}
 								<a href="https://accounts.spotify.com/authorize?{query_string}" class="button is-light">
 									Connect Spotify
@@ -71,6 +58,5 @@
 		</div>
 	</nav>
 </div>
-<Router {routes} {prefix} />
 
 <!-- </section> -->

@@ -20,8 +20,10 @@ function createUser() {
 		},
 		logout: () => {
 			localStorage.removeItem('user');
+			spotify_token.logout();
+			access_token.logout();
 			set(null);
-			replace('/#/login');
+			replace('/login');
 		},
 	};
 }
@@ -32,6 +34,10 @@ export let createSpotToken = () => {
 
 	return {
 		subscribe,
+		logout: () => {
+			localStorage.removeItem('spot_auth');
+			set(null);
+		},
 		setAuth: (token: string) => {
 			localStorage.setItem('spot_auth', token);
 			set(token);
@@ -45,6 +51,10 @@ export let createAuthToken = () => {
 
 	return {
 		subscribe,
+		logout: () => {
+			localStorage.removeItem('splotch_auth');
+			set(null);
+		},
 		setAuth: (token: string) => {
 			localStorage.setItem('splotch_auth', token);
 			set(token);

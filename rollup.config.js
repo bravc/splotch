@@ -59,7 +59,7 @@ export default {
 				env: {
 					isProd: production,
 					API_URL: process.env.API_URL,
-					clieCLIENT_IDnt_id: process.env.CLIENT_ID,
+					CLIENT_ID: process.env.CLIENT_ID,
 				},
 			}),
 		}),

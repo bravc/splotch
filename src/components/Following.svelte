@@ -32,7 +32,7 @@
 </script>
 
 <div class="tile is-parent">
-	<div class="tile box is-child is-mobile is-warning notification">
+	<div class="tile box is-child is-mobile is-primary notification">
 		<p class="title">Add a sound snippet</p>
 		<div class="columns">
 			<div class="column is-full field-group">

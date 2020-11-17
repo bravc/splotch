@@ -10,15 +10,14 @@ $caribbean-green: #06d6a0ff;
 $blue-ncs: #118ab2ff;
 $midnight-green-eagle-green: #073b4cff;
 
-
 // Set your brand colors
-$primary: $persian-green;
-$success: $charcoal;
+$primary: $charcoal;
+$success: $midnight-green-eagle-green;
 $warning: $orange-yellow-crayola;
 $info: $blue-ncs;
+$danger: $burnt-sienna;
 $scrollbar-color: black;
 
 @import '../node_modules/bulma/bulma.sass';
-// @import '~bulma-calendar';
 @import '../node_modules/bulma-extensions/bulma-slider/src/sass/index.sass';
 @import '../node_modules/bulma-extensions/bulma-pageloader/src/sass/index.sass';
