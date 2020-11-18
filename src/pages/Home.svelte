@@ -7,12 +7,13 @@
 	import TrackList from '../components/TrackList.svelte';
 	import { access_token, spotify_token } from '../stores/user';
 	import SnippetForm from '../components/SnippetForm.svelte';
+import { test_tracks } from '../stores/player';
 </script>
 
 <style>
 </style>
 
-{#if $access_token !== null}
+{#if $access_token}
 	<div class="hero-body">
 		<div class="container is-fluid is-primary">
 			<div class="tile is-ancestor">
@@ -21,8 +22,8 @@
 				<SnippetForm />
 			</div>
 			<div class="tile is-ancestor">
-				<TrackList />
-				<!-- <Top /> -->
+				<!-- <TrackList /> -->
+				<Top />
 			</div>
 		</div>
 	</div>

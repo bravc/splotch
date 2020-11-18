@@ -17,9 +17,24 @@ $warning: $orange-yellow-crayola;
 $info: $blue-ncs;
 $danger: $burnt-sienna;
 $scrollbar-color: black;
+$table-background-color: $primary;
+$table-color: white;
+$table-cell-padding: 10px;
+
+.rangeSlider > .rangeBar {
+	color: black;
+}
 
 @import '../node_modules/bulma/bulma.sass';
-$scheme-main: $black;
+.rangeSlider > .rangePips > .pip {
+	color: $light;
+}
+.rangeSlider > .rangeHandle {
+	background: transparent;
+}
+.rangeSlider > .rangeHandle > .rangeNub {
+	color: black;
+}
 
 @import '../node_modules/bulma-extensions/bulma-slider/src/sass/index.sass';
 @import '../node_modules/bulma-extensions/bulma-pageloader/src/sass/index.sass';

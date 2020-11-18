@@ -15,7 +15,7 @@
 
 	setInterval(() => {
 		if ($playing && !$seeking) {
-			console.log(($track_position / 60000).toString().slice(2, 4));
+			// console.log(($track_position / 60000).toString().slice(2, 4));
 			$track_position += 10;
 		}
 	}, 10);

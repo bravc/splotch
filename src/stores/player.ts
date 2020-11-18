@@ -46,17 +46,17 @@ function createPlayer() {
 			p.addListener('ready', async (ready) => {
 				device_id.set(ready.device_id);
 				console.log('Ready with Device ID', device_id);
-				let context = localStorage.getItem('playback_context');
-				if (context) {
-					let res = await fetch(`${apiUrl}/api/recent`, {
-						method: 'GET',
-						mode: 'cors',
-						headers: new Headers({ 'Content-Type': 'application/json', Authorization: `Bearer ${get(access_token)}` }),
-					});
-					let json = await res.json();
+				// let context = localStorage.getItem('playback_context');
+				// if (context) {
+				// 	let res = await fetch(`${apiUrl}/api/recent`, {
+				// 		method: 'GET',
+				// 		mode: 'cors',
+				// 		headers: new Headers({ 'Content-Type': 'application/json', Authorization: `Bearer ${get(access_token)}` }),
+				// 	});
+				// 	let json = await res.json();
 
-					track.set(json.items[0].track);
-				}
+				// 	track.set(json.items[0].track);
+				// }
 			});
 
 			p.addListener('player_state_changed', ({ context, position, duration, track_window: { current_track } }) => {

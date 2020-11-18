@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { track_position, track } from '../stores/current_track';
-	import { player } from '../stores/player';
+	import { player, playing } from '../stores/player';
 	import SnippetModal from './SnippetModal.svelte';
 
 	let start_time = 0;
@@ -21,6 +21,12 @@
 			return `${Math.trunc(duration / 60000)}:${(seconds < 10 ? '0' : '') + seconds}`;
 		}
 		return '-:--';
+	};
+
+	let openSnippetModal = async () => {
+		await $player.pause();
+		playing.set(false);
+		showing = true;
 	};
 </script>
 
@@ -48,10 +54,10 @@
 			</div>
 		</div>
 
-		<button on:click={() => (showing = true)} class="button is-rounded is-small">Create Snippet</button>
+		<button on:click={openSnippetModal} class="button is-rounded is-small">Create Snippet</button>
 		<div class="modal {showing ? 'is-active' : ''}">
 			<div on:click={() => (showing = false)} class="modal-background" />
-			<SnippetModal {showing} />
+			<SnippetModal />
 		</div>
 	</div>
 </div>

@@ -25,7 +25,9 @@
     "svelte": "^3.0.0",
     "svelte-check": "^1.0.0",
     "svelte-preprocess": "^4.5.2",
+    "svelte-range-slider-pips": "^1.5.0",
     "svelte-spa-router": "^3.0.5",
+    "svelte-table": "^0.1.15",
     "tslib": "^2.0.0",
     "typescript": "^3.9.3"
   },
