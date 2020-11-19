@@ -9,6 +9,7 @@
 	import { apiRequest, HttpVerb } from '../api/utils';
 	import { spotify_token } from '../stores/user';
 	import PlayingIcon from './PlayingIcon.svelte';
+import { track_end_position, track_start_position } from '../stores/current_track';
 
 	let tracks: Track[] = [];
 	export let fetchFunc: () => Promise<Track[]>;
@@ -23,6 +24,8 @@
 
 	let playTrack = async (index: number) => {
 		console.log(index);
+		track_start_position.set(0);
+		track_end_position.set(null);
 
 		console.log(`Index is : ${index}`);
 		let res = await apiRequest(

@@ -29,6 +29,16 @@ export type Track = {
 	popularity: number;
 };
 
+export type Snippet = {
+	id: string;
+	name: string;
+	user_id: number;
+	timestamp_start: number;
+	timestamp_end: number;
+	duration_ms: number;
+	track_uri: string;
+};
+
 export type Artist = {
 	id: string;
 	name: string;

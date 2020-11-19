@@ -7,7 +7,8 @@
 	import TrackList from '../components/TrackList.svelte';
 	import { access_token, spotify_token } from '../stores/user';
 	import SnippetForm from '../components/SnippetForm.svelte';
-import { test_tracks } from '../stores/player';
+	import { test_tracks } from '../stores/player';
+	import SnippetList from '../components/SnippetList.svelte';
 </script>
 
 <style>
@@ -24,6 +25,7 @@ import { test_tracks } from '../stores/player';
 			<div class="tile is-ancestor">
 				<!-- <TrackList /> -->
 				<Top />
+				<SnippetList />
 			</div>
 		</div>
 	</div>

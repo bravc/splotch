@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { player, waitForSpot, seeking, playing } from '../stores/player';
-	import { track_position, track } from '../stores/current_track';
+	import { track_position, track, track_start_position, track_end_position } from '../stores/current_track';
 	import { onMount } from 'svelte';
 
 	$: playerIcon = `<i class="${$playing ? 'fas fa-pause' : 'fas fa-play'}" />`;
@@ -14,8 +14,11 @@
 	};
 
 	setInterval(() => {
-		if ($playing && !$seeking) {
-			// console.log(($track_position / 60000).toString().slice(2, 4));
+		let isSnippetOver = $track_end_position ? $track_end_position <= $track_position : false;
+		if (isSnippetOver) {
+			$player.pause()
+		}
+		if ($playing && !$seeking && !isSnippetOver) {
 			$track_position += 10;
 		}
 	}, 10);
@@ -64,11 +67,13 @@
 									$seeking = false;
 								}}
 								type="range"
-								min="0"
-								max={$track ? $track.duration_ms : 0}
+								min={$track_start_position}
+								max={$track_end_position ? $track_end_position : $track ? $track.duration_ms : 0}
 								bind:value={$track_position} />
 							<div class="level-right">
-								<p class="pl-2">{toPrettyTimestamp($track ? $track.duration_ms : undefined)}</p>
+								<p class="pl-2">
+									{toPrettyTimestamp($track_end_position ? $track_end_position : $track ? $track.duration_ms : undefined)}
+								</p>
 							</div>
 						</div>
 						<div class="level">

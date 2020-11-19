@@ -5,7 +5,11 @@
 	import { fade } from 'svelte/transition';
 	import { player, playing as g_playing, seeking } from '../stores/player';
 	import { track_position, track } from '../stores/current_track';
+	import { apiRequest, HttpVerb } from '../api/utils';
+	import { access_token } from '../stores/user';
 
+	const apiUrl = __myapp.env.API_URL;
+	let notification = false;
 	let g = $track ? $track.duration_ms : 100;
 	let timestamps = $track ? [0, g] : [0, 100];
 	let original_start;
@@ -75,6 +79,16 @@
 			}
 		}
 	};
+
+	let create_snippet = async () => {
+		await apiRequest(`${apiUrl}/api/snippet`, HttpVerb.POST, $access_token, {
+			name: snippetName,
+			timestamp_start: timestamps[0],
+			timestamp_end: timestamps[1],
+			track_uri: $track.uri,
+		});
+		notification = { title: 'Snippet Created!' };
+	};
 </script>
 
 <style>
@@ -94,6 +108,14 @@
 </style>
 
 <div class="modal-content notification is-dark">
+	{#if notification}
+		<div class="container is-fluid has-text-centered">
+			<div class="notification is-danger">
+				<h1 class="title">{notification.title}</h1>
+			</div>
+		</div>
+	{/if}
+
 	<div class="title">Create a Snippet</div>
 	<div class="subtitle">Track chosen: {$track ? $track.name : ''}</div>
 	<div class="field">
@@ -156,7 +178,9 @@
 		{/each}
 	</div>
 	<div class="field mu-10 is-grouped">
-		<div class="control"><button disabled={!validSubmit} class="button is-link">Create</button></div>
+		<div class="control">
+			<button disabled={!validSubmit} on:click={create_snippet} class="button is-link">Create</button>
+		</div>
 	</div>
 </div>
 <button class="modal-close is-large" aria-label="close" />
