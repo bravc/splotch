@@ -20,7 +20,7 @@
 			<div class="tile is-ancestor">
 				<UserTile />
 				<SpotifyPlayer />
-				<SnippetForm />
+				<!-- <SnippetForm /> -->
 			</div>
 			<div class="tile is-ancestor">
 				<!-- <TrackList /> -->

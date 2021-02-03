@@ -3,6 +3,8 @@ export type User = {
 	id: number;
 	email: string;
 	spotify_refresh: string;
+	profile_url: string;
+	spotify_id: string;
 };
 
 export type ResponseUser = {

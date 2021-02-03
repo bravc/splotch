@@ -3,15 +3,10 @@
 </script>
 
 <div class="tile is-parent is-2">
-	<div class="tile is-child box notification is-primary columns is-vcentered">
-		<div class="column">
-			<figure><img src="profile.jpg" alt="album art" /></figure>
-		</div>
-		<div class="column">
+	<div class="tile is-child box notification is-primary is-vcentered">
+			<figure><img src={$user.profile_url ? $user.profile_url : ""} alt="album art" /></figure>
 			{#if $user}
 				<p class="title">{$user.username}</p>
-				<p class="subtitle">{$user.email}</p>
 			{/if}
-		</div>
 	</div>
 </div>

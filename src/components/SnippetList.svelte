@@ -2,13 +2,16 @@
 	import { onMount } from 'svelte';
 
 	import { access_token } from '../stores/user';
+	import { playing, player } from '../stores/player';
 	import type { Snippet as SnippetType } from '../types';
 	import { apiRequest, HttpVerb } from '../api/utils';
 	import Snippet from './Snippet.svelte';
+	import SnippetModal from './SnippetModal.svelte';
 
 	const apiUrl = __myapp.env.API_URL;
 
 	let loading = false;
+	let showing = false;
 	let snippets: SnippetType[] = [];
 
 	onMount(async () => {
@@ -25,15 +28,14 @@
 
 <div class="tile is-parent is-vertical">
 	<div class="level">
-		<h1 class="level-left is-size-3">What are your snippets?</h1>
-		<slot name="controls" />
+		<h1 class="level-left is-size-3">Your Snippets</h1>
 	</div>
 	{#if loading}
 		<progress class="progress is-small is-primary" max="100">15%</progress>
 	{:else}
 		<div class="g">
 			{#each snippets as snippet}
-				<Snippet snippet={snippet} />
+				<Snippet {snippet} />
 			{/each}
 		</div>
 	{/if}

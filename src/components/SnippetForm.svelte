@@ -5,7 +5,7 @@
 
 	let start_time = 0;
 	let end_time = 0;
-	let showing = false;
+	let showing = true;
 	$: pretty_start = toPrettyTimestamp(start_time);
 	$: pretty_end = toPrettyTimestamp(end_time);
 

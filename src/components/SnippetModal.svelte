@@ -11,7 +11,7 @@
 	const apiUrl = __myapp.env.API_URL;
 	let notification = false;
 	let g = $track ? $track.duration_ms : 100;
-	let timestamps = $track ? [0, g] : [0, 100];
+	let timestamps = $track ? [0, g] : [0, g];
 	let original_start;
 	let playing = false;
 	let repeat = true;
@@ -91,22 +91,6 @@
 	};
 </script>
 
-<style>
-	#g .rangeHandle {
-		background: black;
-	}
-	#g .rangeSlider {
-		background: black;
-		color: black;
-	}
-	.fa-redo {
-		color: primary;
-	}
-	.rangeSlider > .rangePips > .pip {
-		color: black;
-	}
-</style>
-
 <div class="modal-content notification is-dark">
 	{#if notification}
 		<div class="container is-fluid has-text-centered">
@@ -117,8 +101,18 @@
 	{/if}
 
 	<div class="title">Create a Snippet</div>
-	<div class="subtitle">Track chosen: {$track ? $track.name : ''}</div>
-	<div class="field">
+	<article class="media">
+		<figure class="media-left">
+			<p class="image is-64x64">
+				<img src={$track ? $track.album.images[0].url : ''} alt="" />
+			</p>
+		</figure>
+		<div class="content">
+			<p class={`title is-4`}><strong>{$track ? $track.name : ''}</strong></p>
+			<p class={`subtitle`}>{$track ? $track.artists[0].name : ''}</p>
+		</div>
+	</article>
+	<div class="field pt-10">
 		<label for="" class="label has-text-light">Snippet Name</label>
 		<div class="control has-icons-left has-icons-right">
 			<input class="input" type="text" bind:value={snippetName} placeholder="Snippet Name" />
@@ -139,12 +133,16 @@
 			pushy
 			range={!playing}
 			min={0}
-			max={$track ? $track.duration_ms : 100} />
+			max={$track ? $track.duration_ms : 1000}
+		/>
 	</div>
 	<div class="level">
 		<span on:click={() => startPlayLoop()} class="level-item is-clickable icon is-small">{@html playerIcon}</span>
-		<span on:click={() => (repeat = !repeat)} class="level-item is-clickable icon is-small"><i
-				class="fas fa-redo" /></span>
+		<span
+			on:click={() => (repeat = !repeat)}
+			class={`level-item is-clickable icon is-small ${repeat ? 'has-text-success-dark' : ''}`}
+			><i class="fas fa-redo" /></span
+		>
 	</div>
 	<div class="field">
 		<label for="" class="label has-text-light">Tags</label>
@@ -159,7 +157,8 @@
 				bind:value={tag}
 				class="input"
 				type="text"
-				placeholder="Tag" />
+				placeholder="Tag"
+			/>
 			<span class="icon is-small is-left"> <i class="fas fa-tag" /> </span>
 		</div>
 	</div>
@@ -172,7 +171,8 @@
 						on:click={() => {
 							tags = tags.filter((t) => t != tagg);
 						}}
-						class="tag is-delete" />
+						class="tag is-delete"
+					/>
 				</div>
 			</div>
 		{/each}
@@ -184,3 +184,19 @@
 	</div>
 </div>
 <button class="modal-close is-large" aria-label="close" />
+
+<style>
+	#g .rangeHandle {
+		background: black;
+	}
+	#g .rangeSlider {
+		background: black;
+		color: black;
+	}
+	.fa-redo {
+		color: primary;
+	}
+	.rangeSlider > .rangePips > .pip {
+		color: black;
+	}
+</style>
